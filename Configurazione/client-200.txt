@@ -1,0 +1,15 @@
+#client – 200
+ip addr add 192.168.1.2/24 dev enp0s8
+ip route add default via 192.168.1.1
+
+#OpenVPN - file .ovpn
+client
+dev tun
+proto udp
+remote 3.2.100.2 1194
+resolv-retry infinite
+ca ca.crt
+cert client1.crt
+key client1.key
+remote-cert-tls server
+cipher AES-256-GCM

@@ -1,0 +1,15 @@
+#A1
+ip addr add 10.0.0.1/24 dev eth0
+ip route add default via 10.0.0.3
+
+#OpenVPN - file .ovpn
+client
+dev tun
+proto udp
+remote 10.0.0.3 1194
+resolv-retry infinite
+ca ca.crt
+cert client3.crt
+key client3.key
+remote-cert-tls server
+cipher AES-256-GCM

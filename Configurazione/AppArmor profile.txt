@@ -1,0 +1,113 @@
+#AppArmor Profile
+include <tunables/global>
+
+# vim:syntax=apparmor
+# AppArmor policy for wireshark
+# ###AUTHOR###
+# ###COPYRIGHT###
+# ###COMMENT###
+
+
+/usr/bin/wireshark {
+  include <abstractions/X>
+  include <abstractions/base>
+  include <abstractions/bash>
+  include <abstractions/consoles>
+  include <abstractions/dbus-session>
+  include <abstractions/gnome>
+  include <abstractions/kde-open5>
+  include <abstractions/kde>
+  include <abstractions/nameservice>
+  include <abstractions/opencl-pocl>
+  include <abstractions/user-write>
+
+  capability dac_override,
+  capability dac_read_search,
+  capability fowner,
+  capability net_admin,
+  capability net_raw,
+
+  network bluetooth raw,
+  network packet dgram,
+  network packet raw,
+  network unix stream,
+
+  deny /home/*/Desktop/** rw,
+  deny /home/*/Documenti/** rw,
+  deny /home/*/Immagini/** rw,
+  deny /home/*/Pubblici/** rw,
+  deny /home/*/Scaricati/** rw,
+  deny /home/*/Video/** rw,
+
+  /dev/ r,
+  /etc/ethers r,
+  /etc/pango/pango.modules r,
+  /etc/wireshark/init.lua r,
+  /etc/xdg/xdg-Lubuntu/lxqt/lxqt.conf r,
+  /home/*/ r,
+  /home/*/.Xauthority r,
+  /home/*/.bash_logout r,
+  /home/*/.xsession-errors r,
+  /home/mac/capture/ rw,
+  /home/mac/capture/* rw,
+  /proc/*/net/dev r,
+  /run/user/1000/at-spi/bus_0 rw,
+  /sys/devices/pci0000:00/** r,
+  /usr/bin/dbus-daemon mrix,
+  /usr/bin/dumpcap mrix,
+  /usr/bin/wireshark mrix,
+  /usr/lib/firefox/firefox.sh rPx,
+  /usr/lib/gtk-*/*/loaders/* mr,
+  /usr/lib/x86_64-linux-gnu/wireshark/extcap/androiddump mrix,
+  /usr/lib/x86_64-linux-gnu/wireshark/extcap/ciscodump mrix,
+  /usr/lib/x86_64-linux-gnu/wireshark/extcap/dpauxmon mrix,
+  /usr/lib/x86_64-linux-gnu/wireshark/extcap/randpktdump mrix,
+  /usr/lib/x86_64-linux-gnu/wireshark/extcap/sdjournal mrix,
+  /usr/lib/x86_64-linux-gnu/wireshark/extcap/sshdump mrix,
+  /usr/lib/x86_64-linux-gnu/wireshark/extcap/udpdump mrix,
+  /usr/share/* r,
+  /usr/share/icons r,
+  /usr/share/icons/** r,
+  /usr/share/libfm-qt/translations/libfm-qt_it.qm r,
+  /usr/share/lxqt/lxqt.conf r,
+  /usr/share/mime/** r,
+  /usr/share/snmp/mibs/** r,
+  /usr/share/snmp/mibs/.index rw,
+  /usr/share/thumbnailers/ r,
+  /usr/share/thumbnailers/** r,
+  /usr/share/wireshark/* r,
+  /usr/share/wireshark/** r,
+  @{HOME}/.fonts.cache-* r,
+  @{HOME}/.wireshark/* rw,
+  owner /etc/ r,
+  owner /etc/dbus-1/session.d/ r,
+  owner /etc/fstab r,
+  owner /home/* w,
+  owner /home/*/.config/#786513 rw,
+  owner /home/*/.config/#789761 rw,
+  owner /home/*/.config/* rwlk,
+  owner /home/*/.config/QtProject* lk,
+  owner /home/*/.config/QtProject* rw,
+  owner /home/*/.config/lxqt/lxqt.conf r,
+  owner /home/*/.config/wireshark/** rw,
+  owner /home/*/.local/share/gvfs-metadata/** r,
+  owner /proc/*/attr/apparmor/current r,
+  owner /proc/*/attr/current r,
+  owner /proc/*/cmdline r,
+  owner /proc/*/fd/ r,
+  owner /proc/*/mountinfo r,
+  owner /root/.config/#* rw,
+  owner /root/.config/QtProject* lk,
+  owner /root/.config/QtProject* rwk,
+  owner /root/.config/wireshark/recent rw,
+  owner /root/.config/wireshark/recent_common rw,
+  owner /root/.dbus/session-bus/** w,
+  owner /run/user/1000/ rw,
+  owner /run/user/1000/* rw,
+  owner /run/user/1000/gvfsd/socket-* rw,
+  owner /sys/kernel/security/apparmor/.access rw,
+  owner /sys/kernel/security/apparmor/features/dbus/mask r,
+  owner /usr/share/dbus-1/** r,
+  owner /var/lib/snapd/dbus-1/services/ r,
+
+}

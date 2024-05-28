@@ -1,0 +1,22 @@
+#R402
+
+ip addr add 192.168.2.1/24 dev eth1
+ip addr add 4.1.100.2/24 dev eth0
+ip route add default via 4.1.100.1
+iptables -t nat -F
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -t nat -F
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE 
+
+#OpenVPN - file .ovpn
+
+client
+dev tun
+proto udp
+remote 3.2.100.2 1194
+resolv-retry infinite
+ca ca.crt
+cert client2.crt
+key client2.key
+remote-cert-tls server
+cipher AES-256-GCM
